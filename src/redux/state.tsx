@@ -1,6 +1,6 @@
 import react from 'react';
 
-export const state = {
+let state = {
     profilePage: {
         dialogData: [
             {name: 'Dimych', id: 1},
@@ -23,3 +23,5 @@ export const state = {
         ]
     }
 }
+
+export default state;

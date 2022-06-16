@@ -4,33 +4,32 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import {state} from './redux/state';
+import state from './redux/state';
+
+export type MessageDataProps = {
+    message: string
+}
+
+export type MessagesType = {
+    messageData: MessageDataProps[]
+}
 
 export type DialogDataProps = {
     name: string
     id: number
 }
 
-export type MessageDataProps = {
-    message: string
-}
-
 export type PostDataProps = {
-    message:string
-    likesCount:number
+    message: string
+    likesCount: number
 }
 
 export type DialogsType = {
-    dialogData: Array<DialogDataProps>
-    postData:Array<PostDataProps>
-}
-
-export type MessagesType = {
-    messageData: Array<MessageDataProps>
+    dialogData: DialogDataProps[]
+    postData: PostDataProps[]
 }
 
 export type AllAppType = {
@@ -38,16 +37,36 @@ export type AllAppType = {
     messagePage: MessagesType
 }
 
-function App(props:any) {
+type StatePropsType = {
+    state:AllAppType
+}
+
+// type AppPropsType = {
+//     profilePage: {
+//         dialogData: [
+//             {name: string, id: number},
+//         ],
+//         postData: [
+//             {message:string, likesCount: number},
+//         ]
+//     },
+//     messagePage: {
+//         messageData: [
+//             {message: string},
+//         ]
+//     }
+// }
+
+function App(props: any) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Nav/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile" render={() => <Profile postData={state.profilePage.postData}/>}/>
-                    <Route path="/dialogs" render={() => <Dialogs dialogData={state.profilePage.dialogData}
-                                                                  messageData={state.messagePage.messageData}/>}/>
+                    <Route path="/profile" render={() => <Profile postData={props.state.profilePage.postData}/>}/>
+                    {/*<Route path="/dialogs" render={() => <Dialogs dialogData={state.profilePage.dialogData}*/}
+                    {/*                                              messageData={state.messagePage.messageData}/>}/>*/}
                     <Route path="/news" component={News}/>
                     <Route path="/music" component={Music}/>
                     <Route path="/settings" component={Settings}/>
