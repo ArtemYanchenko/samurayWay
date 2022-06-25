@@ -8,8 +8,7 @@ const ProfileInfo = () => {
             <div>
                 ava + description
             </div>
-            <input type='text'/>
-            <button>Add Post</button>
+
         </div>
     )
 }

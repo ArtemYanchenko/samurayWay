@@ -1,17 +1,28 @@
-import React from 'react';
+import React, {ChangeEvent, ChangeEventHandler } from 'react';
 import classes from './MyPosts.module.css'
 import Post from './Post/Post';
-import {PostDataProps} from '../../../App';
+import {DialogPostData} from '../../../App';
+import {updateNewPostText} from '../../../redux/state';
 
-const MyPosts = (props:any) => {
-    let photoLink = "https://imgv3.fotor.com/images/homepage-feature-card/Fotor-AI-photo-enhancement-tool-ru.jpg";
+const MyPosts = (props: DialogPostData) => {
+
+    // let newPostElement = React.createRef<HTMLTextAreaElement>();
+
+    const onClickHandler = () => {
+        props.addPost(props.newPostText);
+    }
+
+    const onPostChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewPostText(e.currentTarget.value)
+    }
 
     return (
         <div className={classes.items}>
-            <Post postData={)} />
+            <textarea value={props.newPostText} onChange={onPostChange}/>
+            <button onClick={onClickHandler}>Add Post</button>
+            <Post postData={props.postData} />
         </div>
     )
 }
-
 
 export default MyPosts;

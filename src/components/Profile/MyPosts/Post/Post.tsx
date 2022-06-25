@@ -1,17 +1,26 @@
 import React from "react";
 import classes from './Post.module.css';
-import {PostDataProps} from '../../../../App';
+import {DialogPostData, DialogsType, PostDataProps} from '../../../../App';
 
+type PostPropsType = {
+    postData: PostDataProps[]
+}
 
-
-const Post = (props:any) => {
+const Post = (props: PostPropsType) => {
     return (
         <div className={classes.item}>
-            <img src="https://imgv3.fotor.com/images/homepage-feature-card/Fotor-AI-photo-enhancement-tool-ru.jpg" alt=""/>
-            <span>{props.message}</span>
-            <div>
-                <span>like {props.likesCount}</span>
-            </div>
+
+            {props.postData.map((p) => {
+                return <div>
+                    <img src="https://imgv3.fotor.com/images/homepage-feature-card/Fotor-AI-photo-enhancement-tool-ru.jpg" alt=""/>
+                    <span>{p.message}</span>
+                    <div>
+                        <span>like {p.likesCount}</span>
+                    </div>
+                </div>
+            })}
+
+
         </div>
     )
 }
