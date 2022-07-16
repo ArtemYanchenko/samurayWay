@@ -1,5 +1,19 @@
 import {AddPostActionType, ChangeNewTextActionType, DialogsType} from './state';
 
+export const AddPostAC = (postText: string): AddPostActionType => {
+    return {
+        type: 'ADD-POST',
+        postText: postText
+    } as const
+}
+
+export const ChangeNewTextAC = (newText: string): ChangeNewTextActionType => {
+    return {
+        type: 'CHANGE-POST',
+        newText: newText
+    } as const
+}
+
 const ProfileReducer = (state: DialogsType, action: any) => {  // уточнить на сапорте как сделать тип
         switch (action.type) {
             case 'ADD-POST':

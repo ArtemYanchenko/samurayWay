@@ -3,11 +3,11 @@ import classes from './Dialogs.module.css'
 
 import {DialogItem} from './DialogItem/DialogItem';
 import {
-    AddMessageAC,
-    ChangeMessageAC,
+
     MessageDataProps,
     StatePropsType,
 } from '../../redux/state';
+import {AddMessageAC, ChangeMessageAC} from '../../redux/dialogs-reducer';
 
 
 const Message = (props: MessageDataProps) => {
@@ -29,12 +29,12 @@ const Dialogs = (props: StatePropsType) => {
         }
     }
 
-    const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         props.dispatch(ChangeMessageAC(e.currentTarget.value))
     }
 
-    const onKeyPressHandler = (e:KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && newMessageValue !== ''){
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && newMessageValue !== '') {
             props.dispatch(AddMessageAC(props.state.messagePage.newMessageData))
         }
     }
@@ -47,11 +47,11 @@ const Dialogs = (props: StatePropsType) => {
                 {messageElement}
                 <div>
                     <input type="text"
-                           placeholder='enter your message'
+                           placeholder="enter your message"
                            value={newMessageValue}
                            onChange={onChangeHandler}
                            onKeyPress={onKeyPressHandler}
-                           ref={newPost} />
+                           ref={newPost}/>
                 </div>
                 <div>
                     <button onClick={addMessageHandler}>Sent Message</button>

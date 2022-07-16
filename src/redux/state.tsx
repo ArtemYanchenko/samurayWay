@@ -71,34 +71,6 @@ export type StoreType = {
     dispatch: (action: AddPostActionType | ChangeNewTextActionType | AddMessageActionType | ChangeMessageActionType) => void
 }
 
-export const AddPostAC = (postText: string): AddPostActionType => {
-    return {
-        type: 'ADD-POST',
-        postText: postText
-    } as const
-}
-
-export const ChangeNewTextAC = (newText: string): ChangeNewTextActionType => {
-    return {
-        type: 'CHANGE-POST',
-        newText: newText
-    } as const
-}
-
-export const AddMessageAC = (text: string): AddMessageActionType => {
-    return {
-        type: 'ADD-MESSAGE',
-        text: text
-    } as const
-}
-
-export const ChangeMessageAC = (text: string): ChangeMessageActionType => {
-    return {
-        type: 'CHANGE-MESSAGE',
-        text: text
-    } as const
-}
-
 const store: StoreType = {
     _state: {
         profilePage: {

@@ -1,7 +1,8 @@
-import React, {ChangeEvent } from 'react';
+import React, {ChangeEvent} from 'react';
 import classes from './MyPosts.module.css'
 import Post from './Post/Post';
-import {AddPostAC, ChangeNewTextAC, DialogPostData} from '../../../redux/state';
+import {DialogPostData} from '../../../redux/state';
+import {AddPostAC, ChangeNewTextAC} from '../../../redux/profile-reducer';
 
 
 const MyPosts = (props: DialogPostData) => {
@@ -12,15 +13,16 @@ const MyPosts = (props: DialogPostData) => {
         props.dispatch(AddPostAC(props.newPostText));
     }
 
-    const onPostChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.dispatch(ChangeNewTextAC(e.currentTarget.value))
     }
 
     return (
         <div className={classes.items}>
-            <textarea placeholder='enter you new post' onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
+            <textarea placeholder="enter you new post" onChange={onPostChange} ref={newPostElement}
+                      value={props.newPostText}/>
             <button onClick={onClickHandler}>Add Post</button>
-            <Post postData={props.postData} />
+            <Post postData={props.postData}/>
         </div>
     )
 }
