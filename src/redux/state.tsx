@@ -1,3 +1,6 @@
+import ProfileReducer from './profile-reducer';
+import DialogsReducer from './dialogs-reducer';
+
 export type MessageDataProps = {
     message: string
 }
@@ -5,8 +8,6 @@ export type MessageDataProps = {
 export type MessagesType = {
     messageData: MessageDataProps[]
     newMessageData: string
-    // newMessage:string
-    // dispatch:(action: AddPostActionType | ChangeNewTextActionType | AddMessageActionType) => void
 }
 
 export type DialogDataProps = {
@@ -42,22 +43,22 @@ export type StatePropsType = {
     dispatch: (action: AddPostActionType | ChangeNewTextActionType | AddMessageActionType | ChangeMessageActionType) => void
 }
 
-type AddPostActionType = {
+export type AddPostActionType = {
     type: 'ADD-POST'
     postText: string
 }
 
-type ChangeNewTextActionType = {
+export type ChangeNewTextActionType = {
     type: 'CHANGE-POST'
     newText: string
 }
 
-type AddMessageActionType = {
+export type AddMessageActionType = {
     type: 'ADD-MESSAGE'
     text: string
 }
 
-type ChangeMessageActionType = {
+export type ChangeMessageActionType = {
     type: 'CHANGE-MESSAGE'
     text: string
 }
@@ -136,28 +137,10 @@ const store: StoreType = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost = {
-                message: action.postText,
-                likesCount: 0
-            };
-            this._state.profilePage.postData.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === 'CHANGE-POST') {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === 'ADD-MESSAGE') {
-            let newMessage = {
-                message: action.text
-            }
-            this._state.messagePage.messageData.push(newMessage);
-            this._state.messagePage.newMessageData = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === 'CHANGE-MESSAGE') {
-            this._state.messagePage.newMessageData = action.text;
-            this._callSubscriber(this._state);
-        }
+        this._state.profilePage = ProfileReducer(this._state.profilePage, action);
+        this._state.messagePage = DialogsReducer(this._state.messagePage, action);
+        this._callSubscriber(this._state)
+
     }
 }
 
