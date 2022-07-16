@@ -8,50 +8,7 @@ import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import Dialogs from './components/Dialogs/Dialogs';
-import {updateNewPostText} from './redux/state';
-
-export type MessageDataProps = {
-    message: string
-}
-
-export type MessagesType = {
-    messageData: MessageDataProps[]
-}
-
-export type DialogDataProps = {
-    name: string
-    id: number
-}
-
-export type PostDataProps = {
-    message: string
-    likesCount: number
-}
-
-
-export type DialogPostData = {
-    postData: PostDataProps[]
-    addPost:(postTitle:string)=>void
-    updateNewPostText:(newText:string)=>void
-    newPostText: string
-}
-
-export type DialogsType = {
-    dialogData: DialogDataProps[]
-    postData: PostDataProps[]
-    newPostText:string
-}
-
-export type AllAppType = {
-    profilePage: DialogsType
-    messagePage: MessagesType
-}
-
-type StatePropsType = {
-    state: AllAppType
-    addPost:(postTitle:string)=>void
-    updateNewPostText:(newText:string)=>void
-}
+import {StatePropsType} from './redux/state'
 
 
 function App(props: StatePropsType) {
@@ -62,10 +19,9 @@ function App(props: StatePropsType) {
                 <Nav/>
                 <div className="app-wrapper-content">
                     <Route path="/profile" render={() => <Profile
-                        postData={props.state.profilePage.postData}
-                        addPost={props.addPost}
                         newPostText={props.state.profilePage.newPostText}
-                        updateNewPostText={props.updateNewPostText}
+                        dispatch={props.dispatch}
+                        postData={props.state.profilePage.postData}
                     />}/>
                     <Route path="/dialogs" render={() => <Dialogs profilePage={props.state.profilePage}
                                                                   messagePage={props.state.messagePage}/>}/>

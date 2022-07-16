@@ -2,7 +2,8 @@ import React from 'react';
 import classes from './Dialogs.module.css'
 
 import {DialogItem} from './DialogItem/DialogItem';
-import {AllAppType, DialogsType, MessageDataProps, MessagesType} from '../../App';
+import {AllAppType, MessageDataProps} from '../../redux/state';
+
 
 
 const Message = (props: MessageDataProps) => {

@@ -1,6 +1,7 @@
 import React from "react";
 import classes from './Post.module.css';
-import {DialogPostData, DialogsType, PostDataProps} from '../../../../App';
+import {PostDataProps} from '../../../../redux/state';
+
 
 type PostPropsType = {
     postData: PostDataProps[]
