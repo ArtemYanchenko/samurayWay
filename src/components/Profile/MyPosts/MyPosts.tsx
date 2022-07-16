@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler } from 'react';
+import React, {ChangeEvent } from 'react';
 import classes from './MyPosts.module.css'
 import Post from './Post/Post';
 import {AddPostAC, ChangeNewTextAC, DialogPostData} from '../../../redux/state';
@@ -18,7 +18,7 @@ const MyPosts = (props: DialogPostData) => {
 
     return (
         <div className={classes.items}>
-            <textarea onChange={onPostChange} ref={newPostElement} />
+            <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
             <button onClick={onClickHandler}>Add Post</button>
             <Post postData={props.postData} />
         </div>

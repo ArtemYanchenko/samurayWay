@@ -142,6 +142,7 @@ const store: StoreType = {
                 likesCount: 0
             };
             this._state.profilePage.postData.push(newPost);
+            this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
         } else if (action.type === 'CHANGE-POST') {
             this._state.profilePage.newPostText = action.newText;
@@ -151,6 +152,7 @@ const store: StoreType = {
                 message: action.text
             }
             this._state.messagePage.messageData.push(newMessage);
+            this._state.messagePage.newMessageData = '';
             this._callSubscriber(this._state);
         } else if (action.type === 'CHANGE-MESSAGE') {
             this._state.messagePage.newMessageData = action.text;

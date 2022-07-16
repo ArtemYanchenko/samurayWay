@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler} from 'react';
+import React, {ChangeEvent} from 'react';
 import classes from './Dialogs.module.css'
 
 import {DialogItem} from './DialogItem/DialogItem';
@@ -37,7 +37,7 @@ const Dialogs = (props: StatePropsType) => {
             <div className={classes.messages}>
                 {messageElement}
                 <div>
-                    <input type="text" onChange={onChangeHandler} ref={newPost}/>
+                    <input type="text" onChange={onChangeHandler} ref={newPost} value={props.state.messagePage.newMessageData}/>
                 </div>
                 <div>
                     <button onClick={addMessageHandler}>Sent Message</button>
