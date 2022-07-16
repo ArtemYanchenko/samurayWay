@@ -4,6 +4,9 @@ export type MessageDataProps = {
 
 export type MessagesType = {
     messageData: MessageDataProps[]
+    newMessageData: string
+    // newMessage:string
+    // dispatch:(action: AddPostActionType | ChangeNewTextActionType | AddMessageActionType) => void
 }
 
 export type DialogDataProps = {
@@ -19,7 +22,7 @@ export type PostDataProps = {
 
 export type DialogPostData = {
     newPostText: string
-    dispatch: (action: AddPostActionType | ChangeNewTextActionType) => void
+    dispatch: (action: AddPostActionType | ChangeNewTextActionType | AddMessageActionType | ChangeMessageActionType) => void
     postData: PostDataProps[]
 }
 
@@ -36,7 +39,7 @@ export type AllAppType = {
 
 export type StatePropsType = {
     state: AllAppType
-    dispatch: (action: AddPostActionType | ChangeNewTextActionType) => void
+    dispatch: (action: AddPostActionType | ChangeNewTextActionType | AddMessageActionType | ChangeMessageActionType) => void
 }
 
 type AddPostActionType = {
@@ -49,28 +52,51 @@ type ChangeNewTextActionType = {
     newText: string
 }
 
+type AddMessageActionType = {
+    type: 'ADD-MESSAGE'
+    text: string
+}
+
+type ChangeMessageActionType = {
+    type: 'CHANGE-MESSAGE'
+    text: string
+}
+
 export type StoreType = {
     _state: AllAppType
     getState: () => void
     _callSubscriber: (state: AllAppType) => void
     subscribe: (observer: any) => void
-    dispatch: (action: AddPostActionType | ChangeNewTextActionType) => void
+    dispatch: (action: AddPostActionType | ChangeNewTextActionType | AddMessageActionType | ChangeMessageActionType) => void
 }
 
 export const AddPostAC = (postText: string): AddPostActionType => {
     return {
         type: 'ADD-POST',
         postText: postText
-    }
+    } as const
 }
 
 export const ChangeNewTextAC = (newText: string): ChangeNewTextActionType => {
     return {
         type: 'CHANGE-POST',
         newText: newText
-    }
+    } as const
 }
 
+export const AddMessageAC = (text: string): AddMessageActionType => {
+    return {
+        type: 'ADD-MESSAGE',
+        text: text
+    } as const
+}
+
+export const ChangeMessageAC = (text: string): ChangeMessageActionType => {
+    return {
+        type: 'CHANGE-MESSAGE',
+        text: text
+    } as const
+}
 
 const store: StoreType = {
     _state: {
@@ -95,7 +121,9 @@ const store: StoreType = {
                 {message: 'Hello'},
                 {message: 'Yo'},
                 {message: 'blaBla'}
-            ]
+            ],
+            newMessageData: ''
+
         }
     },
     getState() {
@@ -104,26 +132,28 @@ const store: StoreType = {
     _callSubscriber(state: AllAppType) {
         console.log('state is changed');
     },
-    // addPost(postTitle: string) {
-    // },
-    // updateNewPostText(newText: string) {
-    //
-    // },
     subscribe(observer: any) {
         this._callSubscriber = observer;
     },
     dispatch(action) {
         if (action.type === 'ADD-POST') {
             let newPost = {
-                // id: new Date().getTime(),
                 message: action.postText,
                 likesCount: 0
             };
             this._state.profilePage.postData.push(newPost);
             this._callSubscriber(this._state);
-            this._state.profilePage.newPostText = '';
         } else if (action.type === 'CHANGE-POST') {
             this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        } else if (action.type === 'ADD-MESSAGE') {
+            let newMessage = {
+                message: action.text
+            }
+            this._state.messagePage.messageData.push(newMessage);
+            this._callSubscriber(this._state);
+        } else if (action.type === 'CHANGE-MESSAGE') {
+            this._state.messagePage.newMessageData = action.text;
             this._callSubscriber(this._state);
         }
     }

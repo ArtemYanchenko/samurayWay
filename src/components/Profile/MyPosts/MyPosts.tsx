@@ -10,7 +10,6 @@ const MyPosts = (props: DialogPostData) => {
 
     const onClickHandler = () => {
         props.dispatch(AddPostAC(props.newPostText));
-        props.dispatch(ChangeNewTextAC(''));
     }
 
     const onPostChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
