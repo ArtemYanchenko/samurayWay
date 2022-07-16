@@ -18,7 +18,7 @@ const MyPosts = (props: DialogPostData) => {
 
     return (
         <div className={classes.items}>
-            <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
+            <textarea placeholder='enter you new post' onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
             <button onClick={onClickHandler}>Add Post</button>
             <Post postData={props.postData} />
         </div>

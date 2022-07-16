@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import classes from './Dialogs.module.css'
 
 import {DialogItem} from './DialogItem/DialogItem';
@@ -20,14 +20,23 @@ const Dialogs = (props: StatePropsType) => {
 
     let dialogsElements = props.state.profilePage.dialogData.map(d => <DialogItem name={d.name} id={d.id}/>)
     let messageElement = props.state.messagePage.messageData.map(d => <Message message={d.message}/>)
+    let newMessageValue = props.state.messagePage.newMessageData
     let newPost = React.createRef<HTMLInputElement>();
 
     const addMessageHandler = () => {
-        props.dispatch(AddMessageAC(props.state.messagePage.newMessageData))
+        if (newMessageValue !== '') {
+            props.dispatch(AddMessageAC(props.state.messagePage.newMessageData))
+        }
     }
 
     const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
         props.dispatch(ChangeMessageAC(e.currentTarget.value))
+    }
+
+    const onKeyPressHandler = (e:KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && newMessageValue !== ''){
+            props.dispatch(AddMessageAC(props.state.messagePage.newMessageData))
+        }
     }
     return (
         <div className={classes.dialogs}>
@@ -37,7 +46,12 @@ const Dialogs = (props: StatePropsType) => {
             <div className={classes.messages}>
                 {messageElement}
                 <div>
-                    <input type="text" onChange={onChangeHandler} ref={newPost} value={props.state.messagePage.newMessageData}/>
+                    <input type="text"
+                           placeholder='enter your message'
+                           value={newMessageValue}
+                           onChange={onChangeHandler}
+                           onKeyPress={onKeyPressHandler}
+                           ref={newPost} />
                 </div>
                 <div>
                     <button onClick={addMessageHandler}>Sent Message</button>
