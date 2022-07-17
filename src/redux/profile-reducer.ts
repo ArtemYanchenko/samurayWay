@@ -14,7 +14,7 @@ export const ChangeNewTextAC = (newText: string): ChangeNewTextActionType => {
     } as const
 }
 
-const ProfileReducer = (state: DialogsType, action: any) => {  // уточнить на сапорте как сделать тип
+const ProfileReducer = (state: DialogsType, action:any) => {  // уточнить на сапорте как сделать тип
         switch (action.type) {
             case 'ADD-POST':
                 let newPost = {
