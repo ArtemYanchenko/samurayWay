@@ -6,7 +6,7 @@ import {
 
     MessageDataProps,
     StatePropsType,
-} from '../../redux/state';
+} from '../../redux/store';
 import {AddMessageAC, ChangeMessageAC} from '../../redux/dialogs-reducer';
 
 
@@ -25,7 +25,7 @@ const Dialogs = (props: StatePropsType) => {
 
     const addMessageHandler = () => {
         if (newMessageValue !== '') {
-            props.dispatch(AddMessageAC(props.state.messagePage.newMessageData))
+            props.dispatch(AddMessageAC(props.state.messagePage.newMessageData.trim()))
         }
     }
 

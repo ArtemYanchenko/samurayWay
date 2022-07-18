@@ -1,4 +1,4 @@
-import {AddPostActionType, ChangeNewTextActionType, DialogsType} from './state';
+import {AddPostActionType, ChangeNewTextActionType, DialogsType} from './store';
 
 export const AddPostAC = (postText: string): AddPostActionType => {
     return {
@@ -14,7 +14,23 @@ export const ChangeNewTextAC = (newText: string): ChangeNewTextActionType => {
     } as const
 }
 
-const ProfileReducer = (state: DialogsType, action:any) => {  // уточнить на сапорте как сделать тип
+let initialState = {
+    dialogData: [
+        {name: 'Dimych', id: 1},
+        {name: 'Valera', id: 2},
+        {name: 'Misha', id: 3},
+        {name: 'Petya', id: 4},
+        {name: 'Artem', id: 5},
+        {name: 'Karina', id: 6}
+    ],
+    postData: [
+        {message: 'Hi,how are you', likesCount: 14},
+        {message: 'It\'s my first post', likesCount: 73}
+    ],
+    newPostText: ''
+}
+
+const ProfileReducer = (state: DialogsType = initialState, action:any) => {  // уточнить на сапорте как сделать тип
         switch (action.type) {
             case 'ADD-POST':
                 let newPost = {

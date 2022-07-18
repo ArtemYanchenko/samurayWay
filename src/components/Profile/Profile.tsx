@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Profile.module.css"
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {DialogPostData, DialogsType} from '../../redux/state';
+import {DialogPostData, DialogsType} from '../../redux/store';
 
 
 

@@ -1,4 +1,4 @@
-import {AddMessageActionType, ChangeMessageActionType, MessagesType} from './state';
+import {AddMessageActionType, ChangeMessageActionType, MessagesType} from './store';
 
 export const AddMessageAC = (text: string): AddMessageActionType => {
     return {
@@ -14,7 +14,18 @@ export const ChangeMessageAC = (text: string): ChangeMessageActionType => {
     } as const
 }
 
-const DialogsReducer = (state: MessagesType, action: any) => {   // уточнить на сапорте как сделать тип
+let initialState = {
+    messageData: [
+        {message: 'Hi'},
+        {message: 'Hello'},
+        {message: 'Yo'},
+        {message: 'blaBla'}
+    ],
+    newMessageData: ''
+
+}
+
+const DialogsReducer = (state: MessagesType = initialState, action: any) => {   // уточнить на сапорте как сделать тип
     switch (action.type) {
         case 'ADD-MESSAGE':
             let newMessage = {
