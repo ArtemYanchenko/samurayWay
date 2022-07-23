@@ -25,7 +25,7 @@ const Dialogs = (props: StatePropsType) => {
 
     const addMessageHandler = () => {
         if (newMessageValue !== '') {
-            props.dispatch(AddMessageAC(props.state.messagePage.newMessageData.trim()))
+            props.dispatch(AddMessageAC(props.state.messagePage.newMessageData))
         }
     }
 
