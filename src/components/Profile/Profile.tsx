@@ -10,6 +10,7 @@ const Profile = (props:DialogPostData) => {
     return (
         <div className={classes.content}>
             <ProfileInfo />
+            {/*//@ts-ignore*/}
             <MyPosts newPostText={props.newPostText}
                      dispatch={props.dispatch}
                      postData={props.postData}
